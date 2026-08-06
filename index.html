@@ -1,0 +1,3436 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b5cff" />
+  <meta
+    name="description"
+    content="Fleetra Rent Management System membantu owner rental mengelola armada, pelanggan, reservasi, transaksi, operasional, keuangan, dan laporan dalam satu sistem."
+  />
+
+  <title>Fleetra Rent Management System</title>
+
+  <style>
+    :root {
+      --primary: #0b5cff;
+      --primary-dark: #0846c2;
+      --primary-soft: #eaf2ff;
+
+      --navy: #091f45;
+      --navy-light: #123b7d;
+
+      --text: #17233a;
+      --muted: #64728a;
+
+      --white: #ffffff;
+      --surface: #f5f8fc;
+      --surface-blue: #edf4ff;
+      --border: #dfe7f3;
+
+      --yellow: #ffc83d;
+      --green: #13a76b;
+      --green-soft: #e8f8f0;
+      --red: #df4057;
+      --red-soft: #fff0f3;
+      --orange: #f97316;
+      --purple: #7c3aed;
+
+      --shadow-sm: 0 10px 28px rgba(16, 45, 94, 0.08);
+      --shadow-md: 0 22px 55px rgba(16, 45, 94, 0.14);
+      --shadow-lg: 0 34px 90px rgba(8, 36, 88, 0.2);
+
+      --radius-sm: 14px;
+      --radius-md: 22px;
+      --radius-lg: 34px;
+
+      --container: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--white);
+      font-family: "Roboto", Arial, sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    button,
+    .btn,
+    .eyebrow {
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--navy);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(255, 200, 61, 0.95);
+      outline-offset: 4px;
+    }
+
+    .svg-sprite {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--container));
+      margin-inline: auto;
+    }
+
+    .announcement {
+      position: relative;
+      z-index: 5;
+      padding: 10px 16px;
+      color: var(--white);
+      background: linear-gradient(90deg, var(--navy), var(--navy-light));
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.81rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .announcement strong {
+      color: var(--yellow);
+    }
+
+    .section {
+      padding: 78px 0;
+    }
+
+    .section-soft {
+      background: var(--surface);
+    }
+
+    .section-dark {
+      color: var(--white);
+      background:
+        radial-gradient(
+          circle at 86% 15%,
+          rgba(11, 92, 255, 0.28),
+          transparent 28%
+        ),
+        linear-gradient(145deg, #071a38, #0d326e 58%, #0b5cff 145%);
+    }
+
+    .section-heading {
+      max-width: 780px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .section-heading.align-left {
+      margin-inline: 0;
+      text-align: left;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+      font-size: clamp(2rem, 5.6vw, 3.25rem);
+    }
+
+    .section-dark .section-heading h2 {
+      color: var(--white);
+    }
+
+    .section-heading p:last-child {
+      max-width: 690px;
+      margin: 17px auto 0;
+      color: var(--muted);
+      font-size: 1.01rem;
+    }
+
+    .section-heading.align-left p:last-child {
+      margin-inline: 0;
+    }
+
+    .section-dark .section-heading p:last-child {
+      color: #cadbf3;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 14px;
+      color: var(--primary-dark);
+      font-size: 0.79rem;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 24px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--yellow);
+      content: "";
+    }
+
+    .section-dark .eyebrow {
+      color: #9fc2ff;
+    }
+
+    .highlight {
+      position: relative;
+      z-index: 0;
+      white-space: nowrap;
+    }
+
+    .highlight::after {
+      position: absolute;
+      right: 0;
+      bottom: 0.05em;
+      left: 0;
+      z-index: -1;
+      height: 0.28em;
+      border-radius: 999px;
+      background: rgba(255, 200, 61, 0.68);
+      content: "";
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 22px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      text-decoration: none;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn svg {
+      width: 19px;
+      height: 19px;
+      flex: 0 0 19px;
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+      );
+      box-shadow: 0 16px 34px rgba(11, 92, 255, 0.27);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 21px 42px rgba(11, 92, 255, 0.34);
+    }
+
+    .btn-yellow {
+      color: #10213d;
+      background: linear-gradient(135deg, #ffdf69, var(--yellow));
+      box-shadow: 0 16px 34px rgba(255, 183, 3, 0.24);
+    }
+
+    .btn-outline {
+      color: var(--primary-dark);
+      border: 1px solid #bcd1f5;
+      background: var(--white);
+    }
+
+    .btn-lg {
+      min-height: 58px;
+      padding: 16px 25px;
+      font-size: 1rem;
+    }
+
+    .check-dot {
+      display: grid;
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--green);
+    }
+
+    .check-dot svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 64px 0 88px;
+      background:
+        radial-gradient(
+          circle at 88% 18%,
+          rgba(11, 92, 255, 0.14),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 12% 85%,
+          rgba(255, 200, 61, 0.15),
+          transparent 24%
+        ),
+        linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+    }
+
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      border-radius: 999px;
+      content: "";
+      pointer-events: none;
+    }
+
+    .hero::before {
+      top: 35px;
+      right: -180px;
+      width: 450px;
+      height: 450px;
+      border: 65px solid rgba(11, 92, 255, 0.045);
+    }
+
+    .hero::after {
+      bottom: -170px;
+      left: -130px;
+      width: 370px;
+      height: 370px;
+      border: 52px solid rgba(255, 200, 61, 0.07);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      max-width: 720px;
+      margin-bottom: 22px;
+      font-size: clamp(2.7rem, 8.5vw, 5.1rem);
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero-copy > p {
+      max-width: 680px;
+      margin-bottom: 0;
+      color: #53627c;
+      font-size: clamp(1rem, 2.4vw, 1.16rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      margin-top: 28px;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-benefits {
+      display: grid;
+      margin-top: 25px;
+      gap: 10px;
+    }
+
+    .hero-benefit {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #40506a;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .hero-note {
+      margin-top: 13px;
+      color: #7a879b;
+      font-size: 0.76rem;
+    }
+
+    /* DASHBOARD HERO */
+
+    .dashboard-frame {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 26px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.74);
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(14px);
+    }
+
+    .dashboard-app {
+      overflow: hidden;
+      border-radius: 18px;
+      background: #f6f9fe;
+      aspect-ratio: 5 / 4;
+    }
+
+    .dashboard-layout {
+      display: grid;
+      height: 100%;
+      grid-template-columns: 20% 1fr;
+    }
+
+    .dashboard-sidebar {
+      display: flex;
+      flex-direction: column;
+      padding: 15px 11px;
+      color: var(--white);
+      background:
+        radial-gradient(
+          circle at 20% 5%,
+          rgba(19, 112, 255, 0.4),
+          transparent 28%
+        ),
+        linear-gradient(180deg, #0a2654, #0d3a81);
+    }
+
+    .dash-brand {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 19px;
+    }
+
+    .dash-logo {
+      display: grid;
+      width: 27px;
+      height: 27px;
+      place-items: center;
+      border-radius: 8px;
+      color: var(--primary);
+      background: var(--white);
+      font-size: 0.65rem;
+      font-weight: 800;
+    }
+
+    .dash-brand strong {
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: -0.02em;
+    }
+
+    .dash-brand span {
+      display: block;
+      color: #9ec0f2;
+      font-size: 0.35rem;
+    }
+
+    .dash-nav {
+      display: grid;
+      gap: 5px;
+    }
+
+    .dash-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 8px;
+      padding: 7px 8px;
+      color: #d4e3fa;
+      font-size: 0.48rem;
+      font-weight: 700;
+    }
+
+    .dash-nav-item.active {
+      color: var(--white);
+      background: linear-gradient(135deg, #166dff, #0b5cff);
+    }
+
+    .dash-nav-item svg {
+      width: 11px;
+      height: 11px;
+      flex: 0 0 11px;
+    }
+
+    .dashboard-main {
+      padding: 13px;
+      background: #f7f9fd;
+    }
+
+    .dash-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .dash-topbar h3 {
+      margin: 0;
+      font-size: 0.83rem;
+      letter-spacing: -0.03em;
+    }
+
+    .dash-action {
+      border-radius: 7px;
+      padding: 5px 8px;
+      color: var(--white);
+      background: var(--primary);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.4rem;
+      font-weight: 700;
+    }
+
+    .dash-summary {
+      display: grid;
+      margin-top: 10px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .dash-summary-card {
+      min-height: 55px;
+      border: 1px solid #e2e9f4;
+      border-radius: 9px;
+      padding: 7px;
+      background: var(--white);
+    }
+
+    .dash-summary-card:nth-child(1) {
+      background: #edf3ff;
+    }
+
+    .dash-summary-card:nth-child(2) {
+      background: #eaf9f2;
+    }
+
+    .dash-summary-card:nth-child(3) {
+      background: #f5efff;
+    }
+
+    .dash-summary-card:nth-child(4) {
+      background: #fff0f2;
+    }
+
+    .dash-summary-label {
+      color: #667794;
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.31rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .dash-summary-value {
+      margin-top: 4px;
+      color: var(--navy);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+
+    .dash-summary-note {
+      color: #69809f;
+      font-size: 0.27rem;
+    }
+
+    .dash-middle {
+      display: grid;
+      margin-top: 7px;
+      grid-template-columns: 1.25fr 0.9fr 0.85fr;
+      gap: 7px;
+    }
+
+    .dash-panel {
+      min-width: 0;
+      border: 1px solid #e2e9f4;
+      border-radius: 9px;
+      padding: 8px;
+      background: var(--white);
+    }
+
+    .dash-panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--navy);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.38rem;
+      font-weight: 700;
+    }
+
+    .chart-area {
+      position: relative;
+      height: 92px;
+      margin-top: 5px;
+      border-bottom: 1px solid #e6edf7;
+    }
+
+    .chart-grid-line {
+      position: absolute;
+      right: 0;
+      left: 0;
+      height: 1px;
+      background: #edf1f7;
+    }
+
+    .chart-grid-line:nth-child(1) {
+      top: 20%;
+    }
+
+    .chart-grid-line:nth-child(2) {
+      top: 45%;
+    }
+
+    .chart-grid-line:nth-child(3) {
+      top: 70%;
+    }
+
+    .chart-svg {
+      position: absolute;
+      inset: 3px 0 0;
+      width: 100%;
+      height: 88px;
+    }
+
+    .schedule-list {
+      display: grid;
+      margin-top: 5px;
+      gap: 4px;
+    }
+
+    .schedule-item {
+      display: grid;
+      grid-template-columns: 27px 1fr auto;
+      gap: 5px;
+      border-bottom: 1px solid #edf1f7;
+      padding-bottom: 4px;
+      font-size: 0.27rem;
+    }
+
+    .schedule-time {
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .schedule-name {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .schedule-car {
+      display: block;
+      color: #73829a;
+    }
+
+    .schedule-status {
+      align-self: center;
+      border-radius: 999px;
+      padding: 2px 4px;
+      color: var(--primary-dark);
+      background: #e8f1ff;
+      font-size: 0.22rem;
+      font-weight: 700;
+    }
+
+    .quick-search {
+      color: var(--white);
+      background: linear-gradient(145deg, #09285c, #0c3c87);
+    }
+
+    .quick-search .dash-panel-title {
+      color: var(--white);
+    }
+
+    .mini-field {
+      margin-top: 6px;
+    }
+
+    .mini-field label {
+      display: block;
+      margin-bottom: 2px;
+      color: #aac4ea;
+      font-size: 0.22rem;
+      font-weight: 700;
+    }
+
+    .mini-input {
+      border-radius: 5px;
+      padding: 5px;
+      color: #3e4e68;
+      background: var(--white);
+      font-size: 0.25rem;
+    }
+
+    .mini-search-button {
+      margin-top: 6px;
+      border-radius: 5px;
+      padding: 5px;
+      color: var(--navy);
+      background: var(--white);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.25rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .dash-bottom {
+      display: grid;
+      margin-top: 7px;
+      grid-template-columns: 1fr 0.43fr;
+      gap: 7px;
+    }
+
+    .mini-table {
+      width: 100%;
+      margin-top: 5px;
+      border-collapse: collapse;
+      font-size: 0.26rem;
+    }
+
+    .mini-table th {
+      color: #75849a;
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-weight: 700;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    .mini-table th,
+    .mini-table td {
+      border-bottom: 1px solid #edf1f7;
+      padding: 3px 2px;
+    }
+
+    .mini-status {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 4px;
+      color: var(--green);
+      background: var(--green-soft);
+      font-weight: 700;
+    }
+
+    .status-list {
+      display: grid;
+      margin-top: 7px;
+      gap: 7px;
+    }
+
+    .status-row {
+      font-size: 0.27rem;
+    }
+
+    .status-row-head {
+      display: flex;
+      justify-content: space-between;
+      color: #53627c;
+    }
+
+    .status-bar {
+      overflow: hidden;
+      height: 4px;
+      margin-top: 3px;
+      border-radius: 999px;
+      background: #edf1f7;
+    }
+
+    .status-bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+    }
+
+    .hero-badge {
+      position: absolute;
+      right: -6px;
+      bottom: -18px;
+      display: flex;
+      width: min(92%, 360px);
+      align-items: center;
+      gap: 12px;
+      border: 1px solid rgba(255, 200, 61, 0.65);
+      border-radius: 17px;
+      padding: 13px 15px;
+      background: linear-gradient(135deg, #fff8db, #ffffff);
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-badge-icon {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      place-items: center;
+      border-radius: 13px;
+      color: var(--navy);
+      background: var(--yellow);
+    }
+
+    .hero-badge-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .hero-badge strong {
+      display: block;
+      color: var(--navy);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.87rem;
+    }
+
+    .hero-badge span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+
+    /* TRUST */
+
+    .trust-strip {
+      padding: 21px 0;
+      border-block: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+    }
+
+    .trust-item {
+      display: flex;
+      min-height: 76px;
+      align-items: center;
+      gap: 11px;
+      border-radius: 15px;
+      padding: 12px;
+      background: var(--surface);
+    }
+
+    .trust-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--primary);
+      background: var(--surface-blue);
+    }
+
+    .trust-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .trust-item strong {
+      display: block;
+      color: var(--navy);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.25;
+    }
+
+    .trust-item span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.67rem;
+      line-height: 1.35;
+    }
+
+    /* CONTENT CARDS */
+
+    .card-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .pain-card,
+    .feature-card,
+    .benefit-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 23px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-icon {
+      display: grid;
+      width: 50px;
+      height: 50px;
+      place-items: center;
+      border-radius: 15px;
+      color: var(--primary);
+      background: var(--surface-blue);
+    }
+
+    .card-icon svg {
+      width: 25px;
+      height: 25px;
+    }
+
+    .pain-card h3,
+    .feature-card h3,
+    .benefit-card h3 {
+      margin: 17px 0 8px;
+      font-size: 1.08rem;
+      letter-spacing: -0.025em;
+    }
+
+    .pain-card p,
+    .feature-card p,
+    .benefit-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
+
+    .feature-card {
+      transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .feature-card:hover {
+      border-color: #b7cff7;
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .pain-close {
+      max-width: 880px;
+      margin: 31px auto 0;
+      border: 1px solid #ffd4da;
+      border-radius: 18px;
+      padding: 19px 20px;
+      color: #6e2430;
+      background: #fff5f6;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* SOLUTION */
+
+    .solution-grid {
+      display: grid;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .solution-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      padding: 31px;
+      color: var(--white);
+      background:
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(255, 255, 255, 0.18),
+          transparent 27%
+        ),
+        linear-gradient(145deg, #0b2b62, var(--primary-dark));
+      box-shadow: var(--shadow-lg);
+    }
+
+    .solution-panel::after {
+      position: absolute;
+      right: -65px;
+      bottom: -65px;
+      width: 190px;
+      height: 190px;
+      border: 28px solid rgba(255, 255, 255, 0.07);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .solution-panel h3 {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0;
+      color: var(--white);
+      font-size: clamp(1.9rem, 5.5vw, 2.75rem);
+    }
+
+    .solution-panel > p {
+      position: relative;
+      z-index: 1;
+      margin: 16px 0 0;
+      color: #d8e6f8;
+    }
+
+    .solution-list {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      margin-top: 24px;
+      gap: 12px;
+    }
+
+    .solution-list div {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    /* COMPARISON */
+
+    .comparison {
+      display: grid;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      box-shadow: var(--shadow-md);
+    }
+
+    .comparison-col {
+      padding: 27px 23px;
+    }
+
+    .comparison-col.before {
+      background: #fff8f8;
+    }
+
+    .comparison-col.after {
+      background: #f1f7ff;
+    }
+
+    .comparison-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .comparison-head .round-icon {
+      display: grid;
+      width: 43px;
+      height: 43px;
+      place-items: center;
+      border-radius: 13px;
+    }
+
+    .before .round-icon {
+      color: var(--red);
+      background: #ffe5e9;
+    }
+
+    .after .round-icon {
+      color: var(--green);
+      background: #ddf6ea;
+    }
+
+    .round-icon svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .comparison-head h3 {
+      margin: 0;
+      font-size: 1.24rem;
+      letter-spacing: -0.025em;
+    }
+
+    .comparison-list {
+      display: grid;
+      margin: 23px 0 0;
+      padding: 0;
+      gap: 13px;
+      list-style: none;
+    }
+
+    .comparison-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #53627c;
+      font-size: 0.92rem;
+    }
+
+    .comparison-list li svg {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      margin-top: 2px;
+    }
+
+    .before .comparison-list li svg {
+      color: var(--red);
+    }
+
+    .after .comparison-list li svg {
+      color: var(--green);
+    }
+
+    /* BONUS */
+
+    .bonus-wrap {
+      display: grid;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .ebook-card {
+      position: relative;
+      min-height: 420px;
+    }
+
+    .ebook-glow {
+      position: absolute;
+      top: 13%;
+      left: 14%;
+      width: 72%;
+      height: 72%;
+      border-radius: 50%;
+      background: rgba(255, 200, 61, 0.24);
+      filter: blur(42px);
+    }
+
+    .ebook {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      width: min(290px, 74vw);
+      min-height: 375px;
+      border-radius: 8px 20px 20px 8px;
+      padding: 28px 25px;
+      color: var(--white);
+      background:
+        radial-gradient(
+          circle at 84% 14%,
+          rgba(255, 200, 61, 0.28),
+          transparent 25%
+        ),
+        linear-gradient(155deg, #071b3b, #0b4fd9 68%, #0b5cff);
+      box-shadow: 22px 30px 55px rgba(4, 23, 55, 0.38);
+      transform: translateX(-50%) rotate(-4deg);
+    }
+
+    .ebook::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 15px;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.2);
+      content: "";
+    }
+
+    .ebook-label {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--navy);
+      background: var(--yellow);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+    }
+
+    .ebook-number {
+      margin-top: 26px;
+      color: var(--yellow);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 5rem;
+      font-weight: 800;
+      line-height: 0.88;
+      letter-spacing: -0.08em;
+    }
+
+    .ebook h3 {
+      margin: 14px 0 0;
+      color: var(--white);
+      font-size: 1.85rem;
+    }
+
+    .ebook p {
+      margin: 18px 0 0;
+      color: #d8e7fa;
+      font-size: 0.8rem;
+    }
+
+    .ebook-brand {
+      position: absolute;
+      right: 25px;
+      bottom: 23px;
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    .bonus-copy h2 {
+      margin-bottom: 0;
+      color: var(--white);
+      font-size: clamp(2rem, 5.4vw, 3.15rem);
+    }
+
+    .bonus-copy > p {
+      margin: 17px 0 0;
+      color: #cadbf3;
+    }
+
+    .bonus-list {
+      display: grid;
+      margin-top: 23px;
+      gap: 12px;
+    }
+
+    .bonus-list div {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #eff5ff;
+      font-size: 0.93rem;
+      font-weight: 700;
+    }
+
+    /* STEPS */
+
+    .steps {
+      display: grid;
+      gap: 17px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 15px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step-number {
+      display: grid;
+      width: 50px;
+      height: 50px;
+      place-items: center;
+      border-radius: 15px;
+      color: var(--white);
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+      );
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .step p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 0.89rem;
+    }
+
+    /* OFFER */
+
+    .offer-card {
+      overflow: hidden;
+      max-width: 880px;
+      margin-inline: auto;
+      border: 1px solid #bad0f3;
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .offer-head {
+      padding: 30px 24px;
+      color: var(--white);
+      background:
+        radial-gradient(
+          circle at 85% 15%,
+          rgba(255, 200, 61, 0.22),
+          transparent 28%
+        ),
+        linear-gradient(145deg, #071a38, var(--primary-dark));
+      text-align: center;
+    }
+
+    .offer-tag {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 7px 12px;
+      color: var(--navy);
+      background: var(--yellow);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .offer-head h2 {
+      margin: 17px 0 0;
+      color: var(--white);
+      font-size: clamp(2rem, 6vw, 3.25rem);
+    }
+
+    .offer-head p {
+      max-width: 650px;
+      margin: 13px auto 0;
+      color: #d3e3f8;
+    }
+
+    .offer-body {
+      padding: 25px 22px 29px;
+    }
+
+    .offer-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .offer-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border-bottom: 1px solid #edf1f7;
+      padding-bottom: 13px;
+    }
+
+    .offer-item:last-child {
+      border-bottom: 0;
+    }
+
+    .offer-item strong {
+      display: block;
+      color: var(--navy);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.96rem;
+    }
+
+    .offer-item small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .offer-note {
+      margin-top: 22px;
+      border: 1px dashed #b8ccef;
+      border-radius: 15px;
+      padding: 15px;
+      color: #40516f;
+      background: #f5f9ff;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    .offer-action {
+      display: grid;
+      margin-top: 18px;
+      gap: 10px;
+    }
+
+    .offer-action .btn {
+      width: 100%;
+    }
+
+    .checkout-caption {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 0.74rem;
+      text-align: center;
+    }
+
+    .checkout-caption svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* FAQ - NATIVE DETAILS, TETAP BERFUNGSI TANPA JAVASCRIPT */
+
+    .faq-list {
+      display: grid;
+      max-width: 860px;
+      margin-inline: auto;
+      gap: 12px;
+    }
+
+    .faq-item {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .faq-question {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px;
+      color: var(--navy);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-weight: 700;
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-question::marker {
+      display: none;
+      content: "";
+    }
+
+    .faq-plus {
+      display: grid;
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--primary);
+      background: var(--surface-blue);
+      font-size: 1.25rem;
+      line-height: 1;
+      transition:
+        transform 0.2s ease,
+        color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .faq-item[open] .faq-plus {
+      color: var(--white);
+      background: var(--primary);
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 20px 20px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .faq-answer p {
+      margin: 0;
+    }
+
+    /* FINAL CTA */
+
+    .final-cta {
+      position: relative;
+      overflow: hidden;
+      padding: 72px 0 105px;
+      color: var(--white);
+      background:
+        radial-gradient(
+          circle at 82% 20%,
+          rgba(255, 200, 61, 0.2),
+          transparent 27%
+        ),
+        linear-gradient(145deg, #071a38, #0d326e 58%, #0b5cff 145%);
+    }
+
+    .final-cta::before,
+    .final-cta::after {
+      position: absolute;
+      border-radius: 50%;
+      content: "";
+    }
+
+    .final-cta::before {
+      top: -110px;
+      right: -100px;
+      width: 310px;
+      height: 310px;
+      border: 48px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .final-cta::after {
+      bottom: -135px;
+      left: -100px;
+      width: 280px;
+      height: 280px;
+      border: 42px solid rgba(255, 200, 61, 0.08);
+    }
+
+    .final-content {
+      position: relative;
+      z-index: 2;
+      max-width: 810px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .final-content h2 {
+      margin-bottom: 0;
+      color: var(--white);
+      font-size: clamp(2.25rem, 7vw, 4.1rem);
+    }
+
+    .final-content p {
+      max-width: 680px;
+      margin: 18px auto 0;
+      color: #cadbf3;
+      font-size: 1.02rem;
+    }
+
+    .final-badges {
+      display: flex;
+      margin-top: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 9px;
+    }
+
+    .final-badges span {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: #edf5ff;
+      background: rgba(255, 255, 255, 0.08);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .final-actions {
+      display: flex;
+      margin-top: 28px;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .final-actions .btn {
+      width: min(100%, 420px);
+    }
+
+    /* MOBILE CTA */
+
+    .mobile-cta {
+      position: fixed;
+      right: 12px;
+      bottom: 12px;
+      left: 12px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 17px;
+      padding: 9px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 18px 45px rgba(10, 31, 68, 0.25);
+      backdrop-filter: blur(14px);
+    }
+
+    .mobile-cta-copy {
+      display: none;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .mobile-cta-copy strong {
+      display: block;
+      color: var(--navy);
+      font-family: "Poppins", "Roboto", Arial, sans-serif;
+      font-size: 0.8rem;
+    }
+
+    .mobile-cta-copy span {
+      display: block;
+      overflow: hidden;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.64rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .mobile-cta .btn {
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 15px;
+      font-size: 0.84rem;
+    }
+
+    .notice {
+      position: fixed;
+      right: 16px;
+      bottom: 86px;
+      left: 16px;
+      z-index: 60;
+      display: none;
+      max-width: 480px;
+      margin-inline: auto;
+      border: 1px solid #bdd0ef;
+      border-radius: 14px;
+      padding: 13px 15px;
+      color: #294a78;
+      background: #f3f7ff;
+      box-shadow: var(--shadow-md);
+      font-size: 0.82rem;
+      text-align: center;
+    }
+
+    .notice.is-visible {
+      display: block;
+    }
+
+    @media (min-width: 520px) {
+      .hero-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .hero-benefits {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mobile-cta-copy {
+        display: block;
+      }
+
+      .mobile-cta .btn {
+        width: auto;
+        flex: 0 0 auto;
+      }
+    }
+
+    @media (min-width: 680px) {
+      .section {
+        padding: 94px 0;
+      }
+
+      .card-grid.two {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trust-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .comparison {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .comparison-col {
+        padding: 35px;
+      }
+
+      .steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .step {
+        grid-template-columns: 1fr;
+      }
+
+      .final-actions {
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .final-actions .btn {
+        width: auto;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        padding: 84px 0 105px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1.02fr 0.98fr;
+      }
+
+      .hero h1 {
+        font-size: clamp(4rem, 5.6vw, 5.25rem);
+      }
+
+      .card-grid.three {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .card-grid.four {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .solution-grid {
+        grid-template-columns: 0.92fr 1.08fr;
+      }
+
+      .bonus-wrap {
+        grid-template-columns: 0.9fr 1.1fr;
+      }
+
+      .ebook-card {
+        min-height: 505px;
+      }
+
+      .ebook {
+        width: 315px;
+        min-height: 430px;
+      }
+
+      .offer-body {
+        padding: 34px 42px 39px;
+      }
+
+      .offer-list {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 28px;
+      }
+
+      .offer-item {
+        min-height: 80px;
+      }
+
+      .mobile-cta {
+        display: none;
+      }
+
+      .final-cta {
+        padding-bottom: 78px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path
+        d="M20 6 9 17l-5-5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </symbol>
+
+    <symbol id="icon-arrow" viewBox="0 0 24 24">
+      <path
+        d="M5 12h14M13 6l6 6-6 6"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </symbol>
+
+    <symbol id="icon-car" viewBox="0 0 24 24">
+      <path
+        d="M5 11 6.5 7.5A2 2 0 0 1 8.3 6h7.4a2 2 0 0 1 1.8 1.5L19 11M4 11h16a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-1v2h-2v-2H7v2H5v-2H4a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linejoin="round"
+      />
+      <circle cx="7" cy="14.5" r="1" fill="currentColor" />
+      <circle cx="17" cy="14.5" r="1" fill="currentColor" />
+    </symbol>
+
+    <symbol id="icon-calendar" viewBox="0 0 24 24">
+      <rect
+        x="3"
+        y="5"
+        width="18"
+        height="16"
+        rx="2"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+      />
+      <path
+        d="M7 3v4M17 3v4M3 10h18"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linecap="round"
+      />
+    </symbol>
+
+    <symbol id="icon-users" viewBox="0 0 24 24">
+      <circle
+        cx="9"
+        cy="8"
+        r="3"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+      />
+      <path
+        d="M3.5 20c.5-4 2.3-6 5.5-6s5 2 5.5 6M16 6.5a2.5 2.5 0 0 1 0 5M16 14c2.7.2 4.2 2.2 4.5 5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+    </symbol>
+
+    <symbol id="icon-document" viewBox="0 0 24 24">
+      <path
+        d="M6 3h8l4 4v14H6z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M14 3v5h5M9 12h6M9 16h6"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linecap="round"
+      />
+    </symbol>
+
+    <symbol id="icon-wrench" viewBox="0 0 24 24">
+      <path
+        d="M14 6a5 5 0 0 0-6.7 6.7L3 17l4 4 4.3-4.3A5 5 0 0 0 18 10l-3 3-4-4 3-3Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linejoin="round"
+      />
+    </symbol>
+
+    <symbol id="icon-chart" viewBox="0 0 24 24">
+      <path
+        d="M4 20V10M10 20V4M16 20v-7M22 20H2"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linecap="round"
+      />
+    </symbol>
+
+    <symbol id="icon-wallet" viewBox="0 0 24 24">
+      <path
+        d="M4 6h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a3 3 0 0 1 3-3h12"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linecap="round"
+      />
+      <path
+        d="M15 11h6v5h-6a2.5 2.5 0 0 1 0-5Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+      />
+    </symbol>
+
+    <symbol id="icon-infinity" viewBox="0 0 24 24">
+      <path
+        d="M8.4 8.5c-2.3-2.2-5.9-.6-5.9 2.7s3.6 4.9 5.9 2.7L15.6 7c2.3-2.2 5.9-.6 5.9 2.7s-3.6 4.9-5.9 2.7Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </symbol>
+
+    <symbol id="icon-gear" viewBox="0 0 24 24">
+      <circle
+        cx="12"
+        cy="12"
+        r="3"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+      />
+      <path
+        d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.35"
+        stroke-linejoin="round"
+      />
+    </symbol>
+
+    <symbol id="icon-book" viewBox="0 0 24 24">
+      <path
+        d="M4 5.5A3.5 3.5 0 0 1 7.5 2H11v17H7.5A3.5 3.5 0 0 0 4 22ZM20 5.5A3.5 3.5 0 0 0 16.5 2H13v17h3.5A3.5 3.5 0 0 1 20 22Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linejoin="round"
+      />
+    </symbol>
+
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path
+        d="m6 6 12 12M18 6 6 18"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+      />
+    </symbol>
+
+    <symbol id="icon-lock" viewBox="0 0 24 24">
+      <rect
+        x="5"
+        y="10"
+        width="14"
+        height="11"
+        rx="2"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+      />
+      <path
+        d="M8 10V7a4 4 0 0 1 8 0v3"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linecap="round"
+      />
+    </symbol>
+  </svg>
+
+  <div class="announcement">
+    <strong>Lifetime Access</strong> · Tanpa Biaya Langganan · Free Setup ·
+    Bonus Ebook
+  </div>
+
+  <main>
+    <section class="hero" id="beranda">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Web App Manajemen Rental Mobil</p>
+
+          <h1>
+            Kelola Rental Mobil Lebih <span>Rapi</span>, Cepat, dan Terkendali.
+          </h1>
+
+          <p>
+            Pantau armada, pelanggan, reservasi, transaksi, operasional,
+            keuangan, dan laporan dalam satu sistem—tanpa lagi bergantung
+            pada catatan yang tercecer atau chat yang sulit dicari.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-yellow btn-lg" href="#checkout">
+              Beli Fleetra Sekarang
+              <svg aria-hidden="true">
+                <use href="#icon-arrow"></use>
+              </svg>
+            </a>
+
+            <a class="btn btn-outline btn-lg" href="#fitur">
+              Lihat Fitur Fleetra
+            </a>
+          </div>
+
+          <div class="hero-benefits">
+            <div class="hero-benefit">
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Lifetime access
+            </div>
+
+            <div class="hero-benefit">
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Tanpa biaya langganan
+            </div>
+
+            <div class="hero-benefit">
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Free setup aplikasi
+            </div>
+
+            <div class="hero-benefit">
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Bonus ebook strategi rental
+            </div>
+          </div>         
+          </p>
+        </div>
+
+        <div class="dashboard-frame">
+          <div
+            class="dashboard-app"
+            role="img"
+            aria-label="Dashboard Fleetra Rent Management System"
+          >
+            <div class="dashboard-layout">
+              <aside class="dashboard-sidebar">
+                <div class="dash-brand">
+                  <span class="dash-logo">F</span>
+
+                  <span>
+                    <strong>Fleetra</strong>
+                    <span>Rent Car Management System</span>
+                  </span>
+                </div>
+
+                <div class="dash-nav">
+                  <div class="dash-nav-item active">
+                    <svg aria-hidden="true">
+                      <use href="#icon-chart"></use>
+                    </svg>
+                    Dashboard
+                  </div>
+
+                  <div class="dash-nav-item">
+                    <svg aria-hidden="true">
+                      <use href="#icon-car"></use>
+                    </svg>
+                    Armada
+                  </div>
+
+                  <div class="dash-nav-item">
+                    <svg aria-hidden="true">
+                      <use href="#icon-users"></use>
+                    </svg>
+                    Customer
+                  </div>
+
+                  <div class="dash-nav-item">
+                    <svg aria-hidden="true">
+                      <use href="#icon-document"></use>
+                    </svg>
+                    Transaksi
+                  </div>
+
+                  <div class="dash-nav-item">
+                    <svg aria-hidden="true">
+                      <use href="#icon-wrench"></use>
+                    </svg>
+                    Operasional
+                  </div>
+
+                  <div class="dash-nav-item">
+                    <svg aria-hidden="true">
+                      <use href="#icon-wallet"></use>
+                    </svg>
+                    Finance
+                  </div>
+
+                  <div class="dash-nav-item">
+                    <svg aria-hidden="true">
+                      <use href="#icon-chart"></use>
+                    </svg>
+                    Performance
+                  </div>
+
+                  <div class="dash-nav-item">
+                    <svg aria-hidden="true">
+                      <use href="#icon-gear"></use>
+                    </svg>
+                    Setting
+                  </div>
+                </div>
+              </aside>
+
+              <div class="dashboard-main">
+                <div class="dash-topbar">
+                  <h3>Overview</h3>
+                  <span class="dash-action">+ Booking Baru</span>
+                </div>
+
+                <div class="dash-summary">
+                  <div class="dash-summary-card">
+                    <div class="dash-summary-label">Armada tersedia</div>
+                    <div class="dash-summary-value">18</div>
+                    <div class="dash-summary-note">Dari 24 armada</div>
+                  </div>
+
+                  <div class="dash-summary-card">
+                    <div class="dash-summary-label">Rental aktif</div>
+                    <div class="dash-summary-value">7</div>
+                    <div class="dash-summary-note">Berjalan hari ini</div>
+                  </div>
+
+                  <div class="dash-summary-card">
+                    <div class="dash-summary-label">Booking hari ini</div>
+                    <div class="dash-summary-value">5</div>
+                    <div class="dash-summary-note">3 pickup, 2 kembali</div>
+                  </div>
+
+                  <div class="dash-summary-card">
+                    <div class="dash-summary-label">Perlu tindakan</div>
+                    <div class="dash-summary-value">4</div>
+                    <div class="dash-summary-note">Servis, pajak & bayar</div>
+                  </div>
+                </div>
+
+                <div class="dash-middle">
+                  <div class="dash-panel">
+                    <div class="dash-panel-title">
+                      <span>Tren Pendapatan</span>
+                      <span>7 Hari</span>
+                    </div>
+
+                    <div class="chart-area">
+                      <span class="chart-grid-line"></span>
+                      <span class="chart-grid-line"></span>
+                      <span class="chart-grid-line"></span>
+
+                      <svg
+                        class="chart-svg"
+                        viewBox="0 0 300 100"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                      >
+                        <defs>
+                          <linearGradient
+                            id="chartFill"
+                            x1="0"
+                            y1="0"
+                            x2="0"
+                            y2="1"
+                          >
+                            <stop
+                              offset="0"
+                              stop-color="#0b5cff"
+                              stop-opacity=".25"
+                            />
+                            <stop
+                              offset="1"
+                              stop-color="#0b5cff"
+                              stop-opacity="0"
+                            />
+                          </linearGradient>
+                        </defs>
+
+                        <path
+                          d="M5 82 C35 75,45 47,70 52 S110 65,130 39 S165 58,190 48 S220 18,245 35 S275 45,295 28 L295 100 L5 100 Z"
+                          fill="url(#chartFill)"
+                        />
+
+                        <path
+                          d="M5 82 C35 75,45 47,70 52 S110 65,130 39 S165 58,190 48 S220 18,245 35 S275 45,295 28"
+                          fill="none"
+                          stroke="#0b5cff"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div class="dash-panel">
+                    <div class="dash-panel-title">
+                      <span>Jadwal Hari Ini</span>
+                    </div>
+
+                    <div class="schedule-list">
+                      <div class="schedule-item">
+                        <span class="schedule-time">08:00</span>
+                        <span>
+                          <span class="schedule-name">Andi Saputra</span>
+                          <span class="schedule-car">Toyota Avanza</span>
+                        </span>
+                        <span class="schedule-status">Pickup</span>
+                      </div>
+
+                      <div class="schedule-item">
+                        <span class="schedule-time">10:00</span>
+                        <span>
+                          <span class="schedule-name">Rina Amelia</span>
+                          <span class="schedule-car">Honda Brio</span>
+                        </span>
+                        <span class="schedule-status">Berjalan</span>
+                      </div>
+
+                      <div class="schedule-item">
+                        <span class="schedule-time">14:00</span>
+                        <span>
+                          <span class="schedule-name">Dedi Prakoso</span>
+                          <span class="schedule-car">Innova Reborn</span>
+                        </span>
+                        <span class="schedule-status">Berjalan</span>
+                      </div>
+
+                      <div class="schedule-item">
+                        <span class="schedule-time">16:00</span>
+                        <span>
+                          <span class="schedule-name">Sinta Maharani</span>
+                          <span class="schedule-car">Daihatsu Xenia</span>
+                        </span>
+                        <span class="schedule-status">Kembali</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="dash-panel quick-search">
+                    <div class="dash-panel-title">
+                      <span>Cek Armada Cepat</span>
+                    </div>
+
+                    <div class="mini-field">
+                      <label>TGL AMBIL</label>
+                      <div class="mini-input">26/07/2026</div>
+                    </div>
+
+                    <div class="mini-field">
+                      <label>TGL KEMBALI</label>
+                      <div class="mini-input">28/07/2026</div>
+                    </div>
+
+                    <div class="mini-field">
+                      <label>JENIS MOBIL</label>
+                      <div class="mini-input">Semua Jenis Mobil</div>
+                    </div>
+
+                    <div class="mini-search-button">Cari Kendaraan</div>
+                  </div>
+                </div>
+
+                <div class="dash-bottom">
+                  <div class="dash-panel">
+                    <div class="dash-panel-title">
+                      <span>Transaksi Terbaru</span>
+                      <span>Lihat Semua</span>
+                    </div>
+
+                    <table class="mini-table">
+                      <thead>
+                        <tr>
+                          <th>Pelanggan</th>
+                          <th>Mobil</th>
+                          <th>Status</th>
+                          <th>Biaya</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr>
+                          <td>Andi Saputra</td>
+                          <td>Avanza</td>
+                          <td>
+                            <span class="mini-status">Selesai</span>
+                          </td>
+                          <td>450rb</td>
+                        </tr>
+
+                        <tr>
+                          <td>Rina Amelia</td>
+                          <td>Brio</td>
+                          <td>
+                            <span class="mini-status">Booking</span>
+                          </td>
+                          <td>350rb</td>
+                        </tr>
+
+                        <tr>
+                          <td>Dedi Prakoso</td>
+                          <td>Innova</td>
+                          <td>
+                            <span class="mini-status">Berjalan</span>
+                          </td>
+                          <td>850rb</td>
+                        </tr>
+
+                        <tr>
+                          <td>Sinta Maharani</td>
+                          <td>Xenia</td>
+                          <td>
+                            <span class="mini-status">Selesai</span>
+                          </td>
+                          <td>400rb</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="dash-panel">
+                    <div class="dash-panel-title">
+                      <span>Status Armada</span>
+                    </div>
+
+                    <div class="status-list">
+                      <div class="status-row">
+                        <div class="status-row-head">
+                          <span>Tersedia</span>
+                          <strong>18</strong>
+                        </div>
+
+                        <div class="status-bar">
+                          <span
+                            style="width: 75%; background: #14a66a"
+                          ></span>
+                        </div>
+                      </div>
+
+                      <div class="status-row">
+                        <div class="status-row-head">
+                          <span>Sedang Jalan</span>
+                          <strong>7</strong>
+                        </div>
+
+                        <div class="status-bar">
+                          <span
+                            style="width: 42%; background: #0b5cff"
+                          ></span>
+                        </div>
+                      </div>
+
+                      <div class="status-row">
+                        <div class="status-row-head">
+                          <span>Servis</span>
+                          <strong>3</strong>
+                        </div>
+
+                        <div class="status-bar">
+                          <span
+                            style="width: 22%; background: #f97316"
+                          ></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-badge">
+            <span class="hero-badge-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-check"></use>
+              </svg>
+            </span>
+
+            <span>
+              <strong>Satu sistem untuk operasional rental</strong>
+              <span>Lebih mudah dipantau oleh owner dan tim.</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <span class="trust-icon">
+            <svg aria-hidden="true">
+              <use href="#icon-infinity"></use>
+            </svg>
+          </span>
+
+          <span>
+            <strong>Lifetime Access</strong>
+            <span>Gunakan untuk jangka panjang.</span>
+          </span>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">
+            <svg aria-hidden="true">
+              <use href="#icon-wallet"></use>
+            </svg>
+          </span>
+
+          <span>
+            <strong>Tanpa Langganan</strong>
+            <span>Tidak ada biaya bulanan.</span>
+          </span>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">
+            <svg aria-hidden="true">
+              <use href="#icon-gear"></use>
+            </svg>
+          </span>
+
+          <span>
+            <strong>Free Setup</strong>
+            <span>Dibantu hingga siap digunakan.</span>
+          </span>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">
+            <svg aria-hidden="true">
+              <use href="#icon-book"></use>
+            </svg>
+          </span>
+
+          <span>
+            <strong>Bonus Ebook</strong>
+            <span>Strategi meningkatkan omzet rental.</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="masalah">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Masalah yang Sering Terjadi</p>
+
+          <h2>
+            Semakin banyak armada, semakin besar risiko
+            <span class="highlight">operasional berantakan.</span>
+          </h2>
+
+          <p>
+            Satu jadwal terlewat, satu transaksi tidak tercatat, atau satu
+            dokumen kendaraan terlambat diperpanjang dapat berdampak
+            langsung pada pelayanan dan keuntungan bisnis.
+          </p>
+        </div>
+
+        <div class="card-grid three">
+          <article class="pain-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-calendar"></use>
+              </svg>
+            </div>
+
+            <h3>Jadwal sewa sering bentrok</h3>
+
+            <p>
+              Informasi reservasi tersebar sehingga kendaraan yang sama
+              berisiko dipesan pada jadwal berbeda.
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-car"></use>
+              </svg>
+            </div>
+
+            <h3>Status armada sulit dipantau</h3>
+
+            <p>
+              Harus bertanya kepada tim atau mencari chat lama untuk
+              mengetahui unit tersedia, disewa, atau servis.
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-users"></use>
+              </svg>
+            </div>
+
+            <h3>Data pelanggan tercecer</h3>
+
+            <p>
+              Identitas, nomor kontak, dan riwayat rental tersimpan di banyak
+              tempat dan sulit ditemukan.
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-document"></use>
+              </svg>
+            </div>
+
+            <h3>Transaksi lupa dicatat</h3>
+
+            <p>
+              Pembayaran, denda, biaya driver, dan pengeluaran operasional
+              berisiko tidak masuk laporan.
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-wrench"></use>
+              </svg>
+            </div>
+
+            <h3>Servis dan pajak terlewat</h3>
+
+            <p>
+              Jadwal perawatan, pajak, STNK, dan dokumen kendaraan tidak
+              terkontrol secara konsisten.
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-chart"></use>
+              </svg>
+            </div>
+
+            <h3>Laporan masih dibuat manual</h3>
+
+            <p>
+              Owner menghabiskan banyak waktu merapikan data sebelum bisa
+              memahami kondisi bisnis.
+            </p>
+          </article>
+        </div>
+
+        <div class="pain-close">
+          Masalahnya bukan karena Anda kurang bekerja keras. Bisnis Anda
+          membutuhkan sistem yang membantu seluruh informasi tersimpan dan
+          terhubung dengan lebih rapi.
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container solution-grid">
+        <div class="solution-panel">
+          <p class="eyebrow">Solusi untuk Owner Rental</p>
+
+          <h3>Satu tempat untuk mengendalikan aktivitas rental.</h3>
+
+          <p>
+            Fleetra membantu Anda mengurangi pekerjaan administratif dan
+            membuat informasi penting lebih mudah ditemukan.
+          </p>
+
+          <div class="solution-list">
+            <div>
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Data armada dan pelanggan lebih terstruktur
+            </div>
+
+            <div>
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Reservasi dan rental aktif lebih mudah dipantau
+            </div>
+
+            <div>
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Transaksi dan operasional tercatat lebih rapi
+            </div>
+
+            <div>
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Laporan membantu owner mengambil keputusan
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-heading align-left">
+            <p class="eyebrow">Bukan Sekadar Aplikasi</p>
+
+            <h2>
+              Fleetra membantu bisnis rental
+              <span class="highlight">lebih terkendali.</span>
+            </h2>
+
+            <p>
+              Waktu Anda tidak lagi habis untuk mencari data dan memperbaiki
+              pencatatan. Fokus dapat dialihkan ke pelayanan, pemasaran, dan
+              pertumbuhan bisnis.
+            </p>
+          </div>
+
+          <div class="card-grid two">
+            <article class="benefit-card">
+              <div class="card-icon">
+                <svg aria-hidden="true">
+                  <use href="#icon-calendar"></use>
+                </svg>
+              </div>
+
+              <h3>Pelayanan lebih cepat</h3>
+
+              <p>
+                Informasi kendaraan dan transaksi mudah ditemukan ketika
+                pelanggan bertanya.
+              </p>
+            </article>
+
+            <article class="benefit-card">
+              <div class="card-icon">
+                <svg aria-hidden="true">
+                  <use href="#icon-document"></use>
+                </svg>
+              </div>
+
+              <h3>Operasional lebih rapi</h3>
+
+              <p>
+                Data penting tidak lagi bergantung pada chat, ingatan, dan
+                file yang terpisah.
+              </p>
+            </article>
+
+            <article class="benefit-card">
+              <div class="card-icon">
+                <svg aria-hidden="true">
+                  <use href="#icon-chart"></use>
+                </svg>
+              </div>
+
+              <h3>Keputusan lebih terarah</h3>
+
+              <p>
+                Informasi bisnis membantu owner menentukan langkah perbaikan
+                dan pengembangan.
+              </p>
+            </article>
+
+            <article class="benefit-card">
+              <div class="card-icon">
+                <svg aria-hidden="true">
+                  <use href="#icon-users"></use>
+                </svg>
+              </div>
+
+              <h3>Lebih mudah didelegasikan</h3>
+
+              <p>
+                Alur kerja menjadi lebih jelas ketika bisnis mulai memiliki
+                admin atau tim operasional.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="fitur">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Fitur Utama Fleetra</p>
+
+          <h2>
+            Semua kebutuhan operasional rental dalam satu sistem.
+          </h2>
+
+          <p>
+            Mulai dari armada hingga laporan, Fleetra membantu proses bisnis
+            berjalan lebih terstruktur dan mudah dipantau.
+          </p>
+        </div>
+
+        <div class="card-grid four">
+          <article class="feature-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-chart"></use>
+              </svg>
+            </div>
+
+            <h3>Dashboard</h3>
+
+            <p>
+              Lihat ringkasan kondisi bisnis dan aktivitas penting dalam
+              satu tampilan.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-car"></use>
+              </svg>
+            </div>
+
+            <h3>Manajemen Armada</h3>
+
+            <p>
+              Kelola kendaraan, dokumen, status, dan ketersediaan unit.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-users"></use>
+              </svg>
+            </div>
+
+            <h3>Data Pelanggan</h3>
+
+            <p>
+              Simpan identitas pelanggan dan riwayat transaksi dengan lebih
+              rapi.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-calendar"></use>
+              </svg>
+            </div>
+
+            <h3>Reservasi</h3>
+
+            <p>
+              Catat jadwal pemesanan dan kurangi risiko reservasi bentrok.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-car"></use>
+              </svg>
+            </div>
+
+            <h3>Rental Aktif</h3>
+
+            <p>
+              Pantau kendaraan yang sedang disewa dan jadwal
+              pengembaliannya.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-wrench"></use>
+              </svg>
+            </div>
+
+            <h3>Operasional</h3>
+
+            <p>
+              Kelola servis, perawatan, pajak, STNK, dan dokumen kendaraan.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-wallet"></use>
+              </svg>
+            </div>
+
+            <h3>Keuangan</h3>
+
+            <p>
+              Pantau pemasukan, pengeluaran, piutang, dan kewajiban bisnis.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="card-icon">
+              <svg aria-hidden="true">
+                <use href="#icon-document"></use>
+              </svg>
+            </div>
+
+            <h3>Laporan</h3>
+
+            <p>
+              Lihat pendapatan, utilisasi, serta performa setiap armada.
+            </p>
+          </article>
+        </div>
+
+        <div style="margin-top: 34px; text-align: center">
+          <a class="btn btn-primary btn-lg" href="#checkout">
+            Saya Ingin Menggunakan Fleetra
+            <svg aria-hidden="true">
+              <use href="#icon-arrow"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Sebelum dan Sesudah</p>
+
+          <h2>
+            Dari operasional yang melelahkan menjadi lebih terkendali.
+          </h2>
+        </div>
+
+        <div class="comparison">
+          <div class="comparison-col before">
+            <div class="comparison-head">
+              <span class="round-icon">
+                <svg aria-hidden="true">
+                  <use href="#icon-close"></use>
+                </svg>
+              </span>
+
+              <h3>Sebelum Fleetra</h3>
+            </div>
+
+            <ul class="comparison-list">
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-close"></use>
+                </svg>
+                Jadwal rental tersebar di banyak chat.
+              </li>
+
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-close"></use>
+                </svg>
+                Status kendaraan harus ditanyakan satu per satu.
+              </li>
+
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-close"></use>
+                </svg>
+                Data pelanggan tersimpan tidak beraturan.
+              </li>
+
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-close"></use>
+                </svg>
+                Pemasukan dan pengeluaran dihitung manual.
+              </li>
+
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-close"></use>
+                </svg>
+                Servis dan dokumen kendaraan mudah terlewat.
+              </li>
+
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-close"></use>
+                </svg>
+                Owner harus mengingat hampir seluruh aktivitas.
+              </li>
+            </ul>
+          </div>
+
+          <div class="comparison-col after">
+            <div class="comparison-head">
+              <span class="round-icon">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+
+              <h3>Setelah Menggunakan Fleetra</h3>
+            </div>
+
+            <ul class="comparison-list">
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+                Jadwal dan reservasi tercatat dalam sistem.
+              </li>
+
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+                Status armada lebih mudah dipantau.
+              </li>
+
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+                Data pelanggan dan riwayat lebih terstruktur.
+              </li>
+
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+                Transaksi dan laporan lebih mudah diperiksa.
+              </li>
+
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+                Perawatan dan dokumen lebih terkontrol.
+              </li>
+
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+                Owner dapat fokus pada pelayanan dan pertumbuhan.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="bonus">
+      <div class="container bonus-wrap">
+        <div class="ebook-card" aria-label="Bonus ebook Fleetra">
+          <div class="ebook-glow"></div>
+
+          <div class="ebook">
+            <span class="ebook-label">BONUS EBOOK</span>
+
+            <div class="ebook-number">15</div>
+
+            <h3>Strategi Meningkatkan Omzet Rental Mobil</h3>
+
+            <p>
+              Cara mendapatkan lebih banyak pelanggan, meningkatkan repeat
+              order, dan mengembangkan bisnis rental secara berkelanjutan.
+            </p>
+
+            <div class="ebook-brand">FLEETRA</div>
+          </div>
+        </div>
+
+        <div class="bonus-copy">
+          <p class="eyebrow">Bonus untuk Pertumbuhan Bisnis</p>
+
+          <h2>
+            Tidak hanya merapikan operasional. Fleetra juga membantu Anda
+            memahami cara meningkatkan omzet.
+          </h2>
+
+          <p>
+            Dapatkan bonus ebook praktis yang membahas pemasaran dan
+            pengembangan bisnis rental.
+          </p>
+
+          <div class="bonus-list">
+            <div>
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Strategi mendapatkan pelanggan melalui Google dan media sosial
+            </div>
+
+            <div>
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Cara membangun kerja sama dengan hotel, travel, dan corporate
+            </div>
+
+            <div>
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Strategi meningkatkan repeat order dan nilai transaksi
+            </div>
+
+            <div>
+              <span class="check-dot">
+                <svg aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+              </span>
+              Panduan KPI dan roadmap pengembangan bisnis rental
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Cara Memulai</p>
+
+          <h2>Mulai menggunakan Fleetra dalam tiga langkah.</h2>
+
+          <p>
+            Proses dibuat sederhana agar Anda dapat segera beralih dari
+            pencatatan manual ke sistem yang lebih rapi.
+          </p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-number">1</div>
+
+            <div>
+              <h3>Lanjutkan ke checkout</h3>
+
+              <p>
+                Pilih produk dan selesaikan pembelian melalui halaman
+                checkout yang tersedia.
+              </p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-number">2</div>
+
+            <div>
+              <h3>Proses free setup</h3>
+
+              <p>
+                Tim Fleetra membantu menyiapkan aplikasi agar siap digunakan.
+              </p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-number">3</div>
+
+            <div>
+              <h3>Mulai kelola rental</h3>
+
+              <p>
+                Masukkan data armada, pelanggan, dan transaksi ke dalam
+                Fleetra.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="checkout">
+      <div class="container">
+        <div class="offer-card">
+          <div class="offer-head">
+            <span class="offer-tag">Penawaran Fleetra</span>
+
+            <h2>Satu Kali Beli. Gunakan Selamanya.</h2>
+
+            <p>
+              Bangun sistem operasional rental yang lebih profesional tanpa
+              biaya langganan bulanan.
+            </p>
+          </div>
+
+          <div class="offer-body">
+            <div class="offer-list">
+              <div class="offer-item">
+                <span class="check-dot">
+                  <svg aria-hidden="true">
+                    <use href="#icon-check"></use>
+                  </svg>
+                </span>
+
+                <span>
+                  <strong>Fleetra Rent Management System</strong>
+                  <small>
+                    Kelola armada, pelanggan, transaksi, operasional,
+                    keuangan, dan laporan.
+                  </small>
+                </span>
+              </div>
+
+              <div class="offer-item">
+                <span class="check-dot">
+                  <svg aria-hidden="true">
+                    <use href="#icon-check"></use>
+                  </svg>
+                </span>
+
+                <span>
+                  <strong>Lifetime Access</strong>
+                  <small>
+                    Gunakan aplikasi untuk jangka panjang setelah pembelian.
+                  </small>
+                </span>
+              </div>
+
+              <div class="offer-item">
+                <span class="check-dot">
+                  <svg aria-hidden="true">
+                    <use href="#icon-check"></use>
+                  </svg>
+                </span>
+
+                <span>
+                  <strong>Tanpa Biaya Langganan</strong>
+                  <small>
+                    Tidak ada pembayaran bulanan untuk penggunaan aplikasi.
+                  </small>
+                </span>
+              </div>
+
+              <div class="offer-item">
+                <span class="check-dot">
+                  <svg aria-hidden="true">
+                    <use href="#icon-check"></use>
+                  </svg>
+                </span>
+
+                <span>
+                  <strong>Free Setup</strong>
+                  <small>
+                    Persiapan aplikasi dibantu oleh tim Fleetra.
+                  </small>
+                </span>
+              </div>
+
+              <div class="offer-item">
+                <span class="check-dot">
+                  <svg aria-hidden="true">
+                    <use href="#icon-check"></use>
+                  </svg>
+                </span>
+
+                <span>
+                  <strong>Panduan Pengguna Fleetra</strong>
+                  <small>
+                    Panduan untuk membantu owner dan tim memahami aplikasi.
+                  </small>
+                </span>
+              </div>
+
+              <div class="offer-item">
+                <span class="check-dot">
+                  <svg aria-hidden="true">
+                    <use href="#icon-check"></use>
+                  </svg>
+                </span>
+
+                <span>
+                  <strong>Bonus Ebook Strategi Rental</strong>
+                  <small>
+                    “15 Strategi Meningkatkan Omzet Rental Mobil”.
+                  </small>
+                </span>
+              </div>
+            </div>
+
+            <div class="offer-note">
+              Harga, pilihan produk, dan metode pembayaran ditampilkan pada
+              halaman checkout.
+            </div>
+
+            <div class="offer-action">
+              <a
+                class="btn btn-yellow btn-lg"
+                href="https://wa.me/6285196245196?text=Halo%2C%20saya%20tertarik%20membeli%20Fleetra%20Rent%20Management%20System.%20Mohon%20informasi%20langkah%20selanjutnya."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Lanjutkan ke Checkout
+                <svg aria-hidden="true">
+                  <use href="#icon-arrow"></use>
+                </svg>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="faq">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Pertanyaan yang Sering Diajukan</p>
+
+          <h2>Hal penting sebelum menggunakan Fleetra.</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Apakah Fleetra menggunakan sistem langganan?</span>
+              <span class="faq-plus" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="faq-answer">
+              <p>
+                Tidak. Fleetra ditawarkan dengan lifetime access tanpa biaya
+                langganan bulanan untuk penggunaan aplikasi.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Apakah saya harus melakukan setup sendiri?</span>
+              <span class="faq-plus" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="faq-answer">
+              <p>
+                Tidak. Pembelian Fleetra sudah termasuk free setup agar
+                proses persiapan aplikasi menjadi lebih mudah.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>
+                Apakah Fleetra cocok untuk rental dengan sedikit armada?
+              </span>
+              <span class="faq-plus" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="faq-answer">
+              <p>
+                Cocok. Fleetra dapat digunakan oleh rental yang baru mulai
+                membangun sistem maupun usaha yang sedang berkembang.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Apakah data saya aman?</span>
+              <span class="faq-plus" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="faq-answer">
+              <p>
+                Fleetra disiapkan menggunakan akun Google khusus milik bisnis
+                Anda. Data berada pada akun tersebut dan akses mengikuti
+                kontrol akun yang Anda miliki. Data Anda milik anda.
+                
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Apakah saya mendapatkan panduan penggunaan?</span>
+              <span class="faq-plus" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="faq-answer">
+              <p>
+                Ya. Anda mendapatkan Panduan Pengguna Fleetra untuk membantu
+                memahami menu dan alur penggunaan aplikasi.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Apa bonus yang saya dapatkan?</span>
+              <span class="faq-plus" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="faq-answer">
+              <p>
+                Anda mendapatkan bonus ebook “15 Strategi Meningkatkan Omzet
+                Rental Mobil” yang membahas pemasaran, repeat order,
+                kemitraan, upselling, KPI, dan pengembangan bisnis.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Bagaimana cara melakukan pembelian?</span>
+              <span class="faq-plus" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="faq-answer">
+              <p>
+                Klik tombol “Lanjutkan ke Checkout”, pilih produk yang
+                tersedia, lalu selesaikan pembayaran melalui metode yang
+                ditampilkan.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container final-content">
+        <p class="eyebrow">Saatnya Rental Anda Naik Kelas</p>
+
+        <h2>Jangan tunggu operasional semakin rumit.</h2>
+
+        <p>
+          Mulai bangun bisnis rental yang lebih rapi, profesional, dan siap
+          berkembang bersama Fleetra Rent Management System.
+        </p>
+
+        <div class="final-badges">
+          <span>Lifetime Access</span>
+          <span>Tanpa Biaya Langganan</span>
+          <span>Free Setup</span>
+          <span>Bonus Ebook</span>
+        </div>
+
+        <div class="final-actions">
+          <a class="btn btn-yellow btn-lg" href="#checkout">
+            Beli Fleetra Sekarang
+            <svg aria-hidden="true">
+              <use href="#icon-arrow"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="mobile-cta" aria-label="Beli Fleetra">
+    <div class="mobile-cta-copy">
+      <strong>Fleetra Rent Management System</strong>
+      <span>Lifetime access · Free setup · Bonus ebook</span>
+    </div>
+
+    <a class="btn btn-yellow" href="#checkout">
+      Beli Sekarang
+    </a>
+  </div>
+
+
+  <script>
+    (() => {
+      "use strict";
+
+      /*
+        FAQ menggunakan elemen HTML native <details>.
+        JavaScript ini hanya menutup FAQ lain saat satu FAQ dibuka.
+      */
+      const faqItems = Array.from(
+        document.querySelectorAll(".faq-item")
+      );
+
+      faqItems.forEach(function (item) {
+        item.addEventListener("toggle", function () {
+          if (item.open) {
+            faqItems.forEach(function (otherItem) {
+              if (otherItem !== item) {
+                otherItem.open = false;
+              }
+            });
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
